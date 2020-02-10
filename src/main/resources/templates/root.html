@@ -2,41 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="ISO-8859-1">
-		<title>Insert title here</title>
+		<title>Market Values App</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	</head>
 	<body>
-		<header>
-			<h1>Catalog Market Values</h1>
-		</header>
-		<section id="section-search">
-			<label>Symbol Value</label>
-			<textarea rows="1" cols="70" th:text="${symbol_value}"></textarea>
-			<button>Search</button>
-		</section>
-		<section id="section-list-values" class="container-md">
-			<table border="2" class="table table-dark table-hover">
-				<tr>
-					<th><br>Name</br></th>
-					<th><br>Price</br></th>
-					<th><br>EPS</br></th>
-					<th><br>PE</br></th>
-					<th><br>Shares</br></th>
-					<th><br>Currency</br></th>
-				</tr>
-				<tr th:each="value: ${values}">
-					<td th:text="${value.name}" >None</td>
-					<td>
-						 <span th:if="${value.day_change &gt; '0'}" th:text="${value.price}" class="badge badge-success">None</span>
-						 <span th:unless="${value.day_change &gt; '0'}" th:text="${value.price}" class="badge badge-danger">None</span>
-					</td>
-					<td th:text="${value.eps}" >None</td>
-					<td th:text="${value.pe}" >None</td>
-					<td th:text="${value.shares}" >None</td>
-					<td th:text="${value.currency}">None</td>
-				<tr>
-			</table>
-		</section>
+		<header th:insert="fragments/header.html :: header"></header>
+		
+		<div class="container">
+			<section id="section-search" class="jumbotron">
+				<form class="form-inline" th:action="@{/search}" method="post">
+					<label>Symbol Value</label>
+					<input name="value" th:text="${symbol_value}" class="form-control mb-3"></input>
+					<button type="submit" class="btn btn-primary mb-3">Search</button>
+				</form>
+			</section>
+			<section id="section-list-values" class="container-md">
+				<table border="2" class="table table-dark table-hover">
+					<tr>
+						<th><br>Name</br></th>
+						<th><br>Price</br></th>
+						<th><br>EPS</br></th>
+						<th><br>PE</br></th>
+						<th><br>Shares</br></th>
+						<th><br>Currency</br></th>
+					</tr>
+					<tr th:each="value: ${values}">
+						<td th:text="${value.name}" >None</td>
+						<td>
+							 <span th:if="${value.day_change &gt; '0'}" th:text="${value.price}" class="badge badge-success">None</span>
+							 <span th:unless="${value.day_change &gt; '0'}" th:text="${value.price}" class="badge badge-danger">None</span>
+						</td>
+						<td th:text="${value.eps}" >None</td>
+						<td th:text="${value.pe}" >None</td>
+						<td th:text="${value.shares}" >None</td>
+						<td th:text="${value.currency}">None</td>
+					<tr>
+				</table>
+			</section>
+		</div>
+		<footer th:insert="fragments/footer.html :: footer" class="footer"></footer>
+
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	</body>
 </html>

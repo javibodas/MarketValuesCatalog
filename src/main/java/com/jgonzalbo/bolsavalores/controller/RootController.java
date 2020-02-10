@@ -9,6 +9,8 @@ import org.apache.tomcat.util.json.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jgonzalbo.bolsavalores.models.Value;
 
@@ -44,6 +46,12 @@ public class RootController {
 		
 		model.addAttribute("values", values);
 		return "root";
+	}
+	
+	@PostMapping("/search")
+	public void search_value(@RequestParam("value") String value) {
+		// TO-DO
+		System.out.println(value);
 	}
 
 
