@@ -1,0 +1,83 @@
+<div th:fragment="container" class="container-fragment">
+			<section id="section-search" class="jumbotron">
+				<form th:action="@{/search}" method="post">
+					<div class="form-row">
+						<div class="form-group col-md">
+							<label>Country</label>
+		  					<select th:name="country" class="mdb-select md-form" multiple>
+			  					<option selected>Choose your country</option>
+			  					<option>Brazil</option>
+			  					<option>Canada</option>
+			  					<option>China</option>
+			  					<option>Denmark</option>
+			  					<option>Dubai</option>
+			  					<option>Finland</option>
+			  					<option>France</option>
+			  					<option>Germany</option>
+			  					<option>Hong-Kong</option>
+			  					<option>India</option>
+			  					<option>Indonesia</option>
+			  					<option>Ireland</option>
+			  					<option>Malaysia</option>
+			  					<option>Mexico</option>
+			  					<option>Netherlands</option>
+			  					<option>Pakistan</option>
+			  					<option>Philippines</option>
+			  					<option>Russia</option>
+			  					<option>Saudi-Arabia</option>
+			  					<option>Singapore</option>
+			  					<option>South-Africa</option>
+			  					<option>South-Korea</option>
+			  					<option>Spain</option>
+			  					<option>Sweden</option>
+			  					<option>Switzerland</option>
+			  					<option>Thailand</option>
+			  					<option>Turkey</option>
+			  					<option>United-Kingdom</option>
+			  					<option>United-States</option>
+			  					<option>Netherlands</option>
+							</select>
+						</div>
+						<div class="form-group col-md">
+							<label>Index</label>
+							<select th:name="stock" class="mdb-select md-form" searchable="Search here..">
+			  					<option th:each="stock : ${stocks}" th:value="${stock.id}" th:text="${stock.name}" selected></option>
+							</select>
+						</div>
+						<div class="form-group col-md">
+							<label>Value</label>
+		  					<input th:name="value" th:text="${symbol_value}" class="form-control form-control-md mr-3 w-75" type="text" placeholder="TEF,MCD,AAPL" aria-label="Search">
+		  					<i class="fas fa-search" aria-hidden="true"></i>
+		  				</div>
+					</div>
+					<div class="form-row search-button">
+		  				<div class="form-group float-right">
+	  						<button type="submit" class="btn btn-outline-dark">Search</button>
+	  					</div>
+	  				</div>
+				</form>
+			</section>
+			<section id="section-list-values">
+				<table border="2" class="table table-dark table-hover">
+					<tr>
+						<th><br>Name</br></th>
+						<th><br>Price</br></th>
+						<th><br>Day Change</br></th>
+						<th><br>PE</br></th>
+						<th><br>Shares</br></th>
+						<th><br>Market Cap</br></th>
+					</tr>
+					<tr th:each="value: ${values}">
+						<td th:text="${value.name}" >None</td>
+						<td th:text="${value.price}" >None</td>
+						<td>
+							 <span th:if="${value.day_performance &gt; '0%'}" th:text="${value.day_performance}" class="badge badge-success">None</span>
+							 <span th:unless="${value.day_performance &gt; '0%'}" th:text="${value.day_performance}" class="badge badge-danger">None</span>
+						</td>
+						<td th:text="${value.pe}" >None</td>
+						<td th:text="${value.shares}" >None</td>
+						<td th:text="${value.market_cap}">None</td>
+					<tr>
+				</table>
+			</section>
+		</div>

@@ -7,6 +7,15 @@
 	</head>
 	<body>
 		
+		<!-- HEADER -->
+		<header th:insert="fragments/header-login.html :: header" class="header"></header>
+		
+		<!-- CONTAINER -->
+		<div th:insert="fragments/value-container.html :: container" class="container"></div>
+		
+		<!-- FOOTER -->
+		<footer th:insert="fragments/footer.html :: footer" class="footer bg-dark"></footer>
+		
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	</body>
 </html>
