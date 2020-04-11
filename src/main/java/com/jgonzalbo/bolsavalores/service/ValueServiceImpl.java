@@ -69,21 +69,23 @@ public class ValueServiceImpl implements IValueService {
 		int numberOfValues = values.split(",").length;
 
 		JSONArray latestDataValues = externalService.getLatestDataByValues(values);
-		List<Object> fundamentalDataValues = externalService.getFundamentalDataByValues(values).subList(0, numberOfValues - 1);
+		List<Object> fundamentalDataValues = externalService.getFundamentalDataByValues(values);
 
 		for(Object jo: latestDataValues) {
 			Value v = new Value();
-
+			
+			v.setId((String)((JSONObject)jo).get("id"));
 			v.setName((String)((JSONObject)jo).get("symbol"));
 			v.setDay_performance((String)((JSONObject)jo).get("chg_percent"));
 			v.setPrice((String)((JSONObject)jo).get("price"));
 			v.setDay_change((String)((JSONObject)jo).get("dateTime"));
+			v.setCountry(((String)((JSONObject)jo).get("country")).toUpperCase());
 
-			valuesHashMap.put(v.getName(),v);
+			valuesHashMap.put(v.getId(),v);
 		}
 
 		for(Object jo: fundamentalDataValues) {
-			Value v = valuesHashMap.get((String)((JSONObject)jo).get("symbol"));
+			Value v = valuesHashMap.get((String)((JSONObject)jo).get("id"));
 
 			v.setPe((String)((JSONObject)jo).get("pe_ratio"));
 			v.setShares((String)((JSONObject)jo).get("avg_vol_3m"));

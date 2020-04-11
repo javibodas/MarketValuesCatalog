@@ -66,6 +66,7 @@
 						<th><br>PE</br></th>
 						<th><br>Shares</br></th>
 						<th><br>Market Cap</br></th>
+						<th><br>Country</br></th>
 					</tr>
 					<tr th:each="value: ${values}">
 						<td th:text="${value.name}" >None</td>
@@ -77,6 +78,7 @@
 						<td th:text="${value.pe}" >None</td>
 						<td th:text="${value.shares}" >None</td>
 						<td th:text="${value.market_cap}">None</td>
+						<td th:text="${value.country}">None</td>
 					<tr>
 				</table>
 			</section>
