@@ -1,11 +1,7 @@
 package com.jgonzalbo.bolsavalores.externalapi;
 
-import java.util.List;
-
 import org.json.simple.JSONArray;
-import org.springframework.stereotype.Service;
 
-import com.jgonzalbo.bolsavalores.models.Value;
 
 public interface IFCSService {
 	

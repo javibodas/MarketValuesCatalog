@@ -1,8 +1,5 @@
 package com.jgonzalbo.bolsavalores.externalapi;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,9 +8,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import com.jgonzalbo.bolsavalores.controller.RootController;
-import com.jgonzalbo.bolsavalores.models.Value;
 
 @Service
 public class FCSServiceImpl implements IFCSService {
