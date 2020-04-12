@@ -1,0 +1,50 @@
+/***************/
+/*** TAGS *****/
+/**************/
+
+body{
+	background-color: white;
+	position: relative;
+	min-height:100vh;
+}
+
+/***************/
+/*** CLASS ****/
+/**************/
+
+.user-login{
+	position: absolute;
+	right: 0;
+	padding: 1rem;
+	}
+	.user-login > .btn{
+		margin: 0 1rem 0 0;
+	}
+	
+.container{
+	max-width: 70%;
+	margin-top: 5rem;
+}
+
+.jumbotron{
+	padding: 1rem;
+}
+
+.form-group{
+	display: flex;
+	flex-direction: column;
+	}
+	.form-group > label{
+		font-weight: bold;
+	}
+
+.footer{
+	position: absolute;	bottom: 0; 	width: 100%;
+	text-align: center;
+	color: white;
+	}
+
+	.footer img{
+		width: 1rem;
+		height: 1rem;
+	}

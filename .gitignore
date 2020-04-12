@@ -29,3 +29,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### WEBPACK RESOURCES ###
+src/main/resources/package-lock.json
+src/main/resources/node_modules
+
