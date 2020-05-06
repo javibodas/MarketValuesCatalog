@@ -1,13 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import getSearchValues from '../../services/getSearchValues';
+import getIndexStocks from '../../services/getIndexStocks.js';
 
 function Search(props){
 
+	const [ values, setValues ] = useState([]);
+	const [ index, setIndex ] = useState([]);
+	const [ formFilter, setFormFilters ] = useState({
+													value: '',
+													index: '',
+													country: ''
+													});
+
+	useEffect(function(){
+		getIndexStocks()
+		.then((result) => { setIndex(result); })
+		.catch((error) => { console.log('ERROR:' + error)})
+
+	},[]);
+
+	useEffect(function(){
+
+
+	},[values]);
+
 	function getValues(e){
 		e.preventDefault();
-
-		getSearchValues()
-		  .then((result) => { console.log(result)})
+		console.log(formFilter.value + formFilter.contry + formFilter.index)
+		getSearchValues((formFilter.value ? formFilter.value : ''), (formFilter.contry ? formFilter.contry : ''), (formFilter.index ? formFilter.index : ''))
+		  .then((result) => { setValues(result) })
 		  .catch((error) => { console.log('ERROR:' + error)})
 	}
 
@@ -54,13 +75,16 @@ function Search(props){
 						</div>
 						<div className="form-group col-md">
 							<label>Index</label>
-							<select className="mdb-select md-form" searchable="Search here..">
+							<select className="mdb-select md-form" searchable="Search here.." onChange={e => setFormFilters({index : e.target.options[e.target.selectedIndex].attributes[0].value})}>
 								<option>Choose an Index</option>
+								{index.map((ind) => 
+									<option id={ind.id}>{ind.name}</option>
+								)}
 							</select>
 						</div>
 						<div className="form-group col-md">
 							<label>Value</label>
-		  					<input className="form-control form-control-md mr-3 w-75" type="text" placeholder="TEF,MCD,AAPL" aria-label="Search" />
+		  					<input className="form-control form-control-md mr-3 w-75" type="text" placeholder="TEF,MCD,AAPL" aria-label="Search" value={formFilter.value} onChange={e => setFormFilters({value : e.target.value})}/>
 		  					<i className="fas fa-search" aria-hidden="true"></i>
 		  				</div>
 					</div>
@@ -82,6 +106,17 @@ function Search(props){
 						<th><b>Market Cap</b></th>
 						<th><b>Country</b></th>
 					</tr>
+					{values.map((value) =>  
+						<tr>
+							<td><b>{value.name}</b></td>
+							<td><b>{value.price}</b></td>
+							<td><b>{value.day_performance}</b></td>
+							<td><b>{value.pe}</b></td>
+							<td><b>{value.shares}</b></td>
+							<td><b>{value.market_cap}</b></td>
+							<td><b>{value.country}</b></td>
+						</tr>
+					)}
 				</table>
 			</section>
 		</div>
