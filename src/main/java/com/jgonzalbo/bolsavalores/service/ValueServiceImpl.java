@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jgonzalbo.bolsavalores.externalapi.IFCSService;
-import com.jgonzalbo.bolsavalores.models.Stock;
+import com.jgonzalbo.bolsavalores.models.Index;
 import com.jgonzalbo.bolsavalores.models.Value;
 
 @Service
@@ -22,7 +22,7 @@ public class ValueServiceImpl implements IValueService {
 	private IFCSService externalService;
 
 	@Autowired
-	private IStockService stockService;
+	private IIndexService stockService;
 
 	@Override
 	public Object[] search(String values, String index, String countries) {
@@ -30,7 +30,7 @@ public class ValueServiceImpl implements IValueService {
 
 		Object[] o = new Object[3];
 		List<Value> listValues = new LinkedList<>();
-		List<Stock> listIndex = new LinkedList<>();
+		List<Index> listIndex = new LinkedList<>();
 
 		if(values != null && !values.trim().equals("")) {
 			listValues = this.getDataValues(values);

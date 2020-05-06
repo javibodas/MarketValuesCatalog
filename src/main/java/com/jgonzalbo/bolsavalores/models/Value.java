@@ -20,9 +20,7 @@ public class Value {
 	private String industry;
 	private String sector;
 	
-	public Value() {
-		super();
-	}
+	public Value() {}
 	
 	public String getId() {
 		return id;

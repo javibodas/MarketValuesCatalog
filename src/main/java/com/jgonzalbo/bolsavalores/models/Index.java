@@ -1,12 +1,16 @@
 package com.jgonzalbo.bolsavalores.models;
 
-public class Stock {
+public class Index {
 	
 	private int id;
 	private String name;
 	private String country;
+	private String price;
+	private String day_performance;
 	
-	public Stock(int id, String name, String country) {
+	public Index() {}
+
+	public Index(int id, String name, String country) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -30,6 +34,28 @@ public class Stock {
 	}
 	public void setCountry(String country) {
 		this.country = country;
+	}
+	
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getDay_performance() {
+		return day_performance;
+	}
+
+	public void setDay_performance(String day_performance) {
+		this.day_performance = day_performance;
+	}
+	
+	@Override
+	public String toString() {
+		return "Index [id=" + id + ", name=" + name + ", country=" + country + ", price=" + price + ", day_performance="
+				+ day_performance + "]";
 	}
 
 }

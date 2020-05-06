@@ -9,18 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jgonzalbo.bolsavalores.externalapi.IFCSService;
-import com.jgonzalbo.bolsavalores.models.Stock;
+import com.jgonzalbo.bolsavalores.models.Index;
 import com.jgonzalbo.bolsavalores.models.Value;
 
 @Service
-public class StocksServiceImpl implements IStockService {
+public class IndexServiceImpl implements IIndexService {
 	
 	@Autowired
 	private IFCSService externalService;
 	
 	@Override
-	public List<Stock> getAllStocks() {
-		List<Stock> stocksList = new LinkedList<>();
+	public List<Index> getAllStocks() {
+		List<Index> stocksList = new LinkedList<>();
 		JSONArray listStokcs = null;
       
         // Api stocks
@@ -28,7 +28,7 @@ public class StocksServiceImpl implements IStockService {
         	
 			listStokcs = externalService.getAllIndex();
 			for(Object jo: listStokcs) {
-				stocksList.add(new Stock(Integer.parseInt((String)((JSONObject)jo).get("category_id")),
+				stocksList.add(new Index(Integer.parseInt((String)((JSONObject)jo).get("category_id")),
 							(String)((JSONObject)jo).get("category_name"),
 							(String)((JSONObject)jo).get("country")));
 			}
@@ -37,21 +37,21 @@ public class StocksServiceImpl implements IStockService {
 		}
         
         // Default Stock
-        stocksList.add(new Stock(-1, "Choose stock", null));
+        stocksList.add(new Index(-1, "Choose stock", null));
         
         return stocksList;
 	}
 
 	@Override
-	public List<Stock> geStocksByValues(List<Value> values) {
-		List<Stock> stocks = new LinkedList<>();
+	public List<Index> geStocksByValues(List<Value> values) {
+		List<Index> stocks = new LinkedList<>();
     	// TO-DO
     	return stocks;
 	}
 
 	@Override
-	public List<Stock> getStockByCountries(String[] countries) {
-		List<Stock> stocks = new LinkedList<>();    	
+	public List<Index> getStockByCountries(String[] countries) {
+		List<Index> stocks = new LinkedList<>();    	
     	
     	String cs = "";
     	for(String country : countries) {
@@ -73,7 +73,7 @@ public class StocksServiceImpl implements IStockService {
 			
 
 			for(Object jo: listStokcs) {
-				stocks.add(new Stock(Integer.parseInt((String)((JSONObject)jo).get("category_id")),
+				stocks.add(new Index(Integer.parseInt((String)((JSONObject)jo).get("category_id")),
 							(String)((JSONObject)jo).get("category_name"),
 							(String)((JSONObject)jo).get("country")));
 			}

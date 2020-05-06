@@ -1,11 +1,20 @@
 import React from 'react'
+import getSearchValues from '../../services/getSearchValues';
 
 function Search(props){
+
+	function getValues(e){
+		e.preventDefault();
+
+		getSearchValues()
+		  .then((result) => { console.log(result)})
+		  .catch((error) => { console.log('ERROR:' + error)})
+	}
 
     return (
         <div className="container">
 			<section id="section-search" className="jumbotron">
-				<form>
+				<form onSubmit={getValues}>
 					<div className="form-row">
 						<div className="form-group col-md">
 							<label>Country</label>

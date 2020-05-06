@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "servor static index.html 9090 --reload",
     "build": "webpack --mode production",
     "dev": "webpack --mode development"
   },
@@ -22,5 +23,8 @@
     "react-dom": "^16.13.1",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "wouter": "^2.4.0"
   }
 }
