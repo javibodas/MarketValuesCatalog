@@ -111,7 +111,7 @@ function Search(props){
 							<td>{value.name}</td>
 							<td>{value.price}</td>
 							<td>{value.day_performance > '0%' ? <span className="badge badge-success">{value.day_performance} </span> : <span className="badge badge-danger">{value.day_performance} </span>}</td>
-							<td>{value.pe == '' ? N/A : value.pe}</td>
+							<td>{value.pe == '' ? 'N/A' : value.pe}</td>
 							<td>{value.shares}</td>
 							<td>{value.market_cap}</td>
 							<td>{value.country}</td>
