@@ -9,8 +9,10 @@ public interface IFCSService {
 	public JSONArray getIndexByCountries(String countries);
 	public JSONArray getValuesByCountries(String countries);
 	public JSONArray getValuesByIndex(String id);
-	public JSONArray getLatestDataByValues(String values);
-	public JSONArray getFundamentalDataByValues(String values);
+	public JSONArray getLatestDataBySymbolValues(String values);
+	public JSONArray getFundamentalDataBySymbolValues(String values);
+	public JSONArray getLatestDataByIdValues(String values);
+	public JSONArray getFundamentalDataByIdValues(String values);
 	public JSONArray geIndexByValues();
 	
 

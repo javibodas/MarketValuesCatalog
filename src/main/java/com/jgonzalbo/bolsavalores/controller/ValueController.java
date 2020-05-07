@@ -39,7 +39,7 @@ public class ValueController {
 	@GetMapping("/search")
 	@ResponseBody
 	public ResponseEntity<List<Value>> searchValue(@RequestParam("value") String value, @RequestParam("country") String countries, @RequestParam("stock") String stock) {
-		logger.log(Level.INFO, "GET /values/search?value=" + value + "&country=" + countries + "&" + stock);
+		logger.log(Level.INFO, "GET /values/search?value=" + value + "&country=" + countries + "&stock=" + stock);
 		
 		Object[] lists = valueService.search(value, stock, countries);
 		return new ResponseEntity<List<Value>>((List<Value>)lists[0], HttpStatus.OK);

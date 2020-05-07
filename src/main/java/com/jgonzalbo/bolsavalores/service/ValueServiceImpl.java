@@ -33,7 +33,7 @@ public class ValueServiceImpl implements IValueService {
 		List<Index> listIndex = new LinkedList<>();
 
 		if(values != null && !values.trim().equals("")) {
-			listValues = this.getDataValues(values);
+			listValues = this.getValuesBySymbol(values);
 			listIndex = stockService.geStocksByValues(listValues);
 		}else if(index != null && !index.trim().equals("")) {
 			listValues = this.getValuesByIndex(index);
@@ -56,20 +56,35 @@ public class ValueServiceImpl implements IValueService {
 		JSONArray latestDataValues = externalService.getValuesByIndex(index);
 		for(Object jo: latestDataValues) {
 			if(!values.equals("")) values += ",";
-			values += (String)((JSONObject)jo).get("short_name");
+			//values += (String)((JSONObject)jo).get("short_name");
+			values += (String)((JSONObject)jo).get("stock_id");
 		}
 
-		listValues = this.getDataValues(values);
+		listValues = this.getValuesById(values);
 
 		return listValues;
 	}
+	
+	private List<Value> getValuesBySymbol(String values){
 
-	private List<Value> getDataValues(String values) {
+		JSONArray latestDataValues = externalService.getLatestDataBySymbolValues(values);
+		List<Object> fundamentalDataValues = externalService.getFundamentalDataBySymbolValues(values);
+		
+		return getValuesFromData(latestDataValues, fundamentalDataValues);
+		
+	}
+	
+	private List<Value> getValuesById(String values){
+
+		JSONArray latestDataValues = externalService.getLatestDataByIdValues(values);
+		List<Object> fundamentalDataValues = externalService.getFundamentalDataByIdValues(values);
+		
+		return getValuesFromData(latestDataValues, fundamentalDataValues);
+		
+	}
+
+	private List<Value> getValuesFromData(JSONArray latestDataValues, List<Object> fundamentalDataValues) {
 		HashMap<String, Value> valuesHashMap = new HashMap<>();
-		int numberOfValues = values.split(",").length;
-
-		JSONArray latestDataValues = externalService.getLatestDataByValues(values);
-		List<Object> fundamentalDataValues = externalService.getFundamentalDataByValues(values);
 
 		for(Object jo: latestDataValues) {
 			Value v = new Value();

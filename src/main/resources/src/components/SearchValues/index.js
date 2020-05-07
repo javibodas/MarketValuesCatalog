@@ -108,13 +108,13 @@ function Search(props){
 					</tr>
 					{values.map((value) =>  
 						<tr>
-							<td><b>{value.name}</b></td>
-							<td><b>{value.price}</b></td>
-							<td><b>{value.day_performance}</b></td>
-							<td><b>{value.pe}</b></td>
-							<td><b>{value.shares}</b></td>
-							<td><b>{value.market_cap}</b></td>
-							<td><b>{value.country}</b></td>
+							<td>{value.name}</td>
+							<td>{value.price}</td>
+							<td>{value.day_performance > '0%' ? <span className="badge badge-success">{value.day_performance} </span> : <span className="badge badge-danger">{value.day_performance} </span>}</td>
+							<td>{value.pe == '' ? N/A : value.pe}</td>
+							<td>{value.shares}</td>
+							<td>{value.market_cap}</td>
+							<td>{value.country}</td>
 						</tr>
 					)}
 				</table>

@@ -93,7 +93,7 @@ public class FCSServiceImpl implements IFCSService {
 	 */
 	
 	@Override
-	public JSONArray getLatestDataByValues(String values) {
+	public JSONArray getLatestDataBySymbolValues(String values) {
 		return 	callAPI(uri
        			.concat("/stock/latest?symbol=")
     			.concat(values)
@@ -102,9 +102,27 @@ public class FCSServiceImpl implements IFCSService {
 	}
 	
 	@Override
-	public JSONArray getFundamentalDataByValues(String values) {
+	public JSONArray getFundamentalDataBySymbolValues(String values) {
 		return callAPI(uri
 	       			.concat("/stock/fundamental?symbol=")
+	        			.concat(values)
+	        			.concat("&access_key=")
+	        			.concat(key));
+	}
+	
+	@Override
+	public JSONArray getLatestDataByIdValues(String values) {
+		return 	callAPI(uri
+       			.concat("/stock/latest?id=")
+    			.concat(values)
+    			.concat("&access_key=")
+    			.concat(key));
+	}
+	
+	@Override
+	public JSONArray getFundamentalDataByIdValues(String values) {
+		return callAPI(uri
+	       			.concat("/stock/fundamental?id=")
 	        			.concat(values)
 	        			.concat("&access_key=")
 	        			.concat(key));
