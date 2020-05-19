@@ -11,6 +11,16 @@ body{
 /***************/
 /*** CLASS ****/
 /**************/
+	
+.container{
+	max-width: 70%;
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+}
+.username{
+    text-align: center;
+    justify-content: center;
+}
 
 .user-login{
 	position: absolute;
@@ -20,13 +30,14 @@ body{
 	.user-login > .btn{
 		margin: 0 1rem 0 0;
 	}
-	
-.container{
-	max-width: 70%;
-	margin-top: 5rem;
-	margin-bottom: 5rem;
-}
+	.user-login > img:hover{
+		cursor: pointer;
+	}
 
+	.dropdown-menu{
+		left: -9rem;
+		padding-left: 1rem; 
+	}
 .jumbotron{
 	padding: 1rem;
 }
@@ -37,11 +48,19 @@ body{
 	}
 	.form-group > label{
 		font-weight: bold;
-	}
+    }
+    .form-group select:hover{
+        cursor:pointer;
+    }
+.search-button > div{
+    position: relative!important;
+    float: right!important;
+}
 
 .footer{
 	position: fixed; bottom: 0; width: 100%;
-	text-align: center;
+    text-align: center;
+    justify-content: center;
 	color: white;
 	background-color: #343a40!important;
 	}

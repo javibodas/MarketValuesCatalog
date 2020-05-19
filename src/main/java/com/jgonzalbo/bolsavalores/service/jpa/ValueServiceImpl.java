@@ -1,4 +1,4 @@
-package com.jgonzalbo.bolsavalores.service;
+package com.jgonzalbo.bolsavalores.service.jpa;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import com.jgonzalbo.bolsavalores.externalapi.IFCSService;
 import com.jgonzalbo.bolsavalores.models.Index;
 import com.jgonzalbo.bolsavalores.models.Value;
+import com.jgonzalbo.bolsavalores.service.IIndexService;
+import com.jgonzalbo.bolsavalores.service.IValueService;
 
 @Service
 public class ValueServiceImpl implements IValueService {

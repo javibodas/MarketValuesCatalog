@@ -1,20 +1,37 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'wouter'
+import UserContext from '../../context/userContext';
+import UserProfileCard from './UserProfileCard';
+import UserLoginCard from './UserLoginCard';
+import './index.css';
 
-function Header(props){
-    return(
-        <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-	        <Link className="navbar-brand" to="/">MarketValuesApp</Link>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    	        <span className="navbar-toggler-icon"></span>
-            </button>
+export default function Header(props){
 
-            <div className="collapse navbar-collapse user-login">
-    	        <Link className="btn btn-outline-light" to="loginUser">Sign In</Link>
-    	        <Link className="btn btn-outline-light" to="/createUser">Sign Up</Link>
-            </div>
-        </nav>
-    )
+    const { user, setUser } = useContext(UserContext);
+
+    return(<nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                    <Link className="navbar-brand" to="/">MarketValuesApp</Link>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse">
+                        {(  user.authenticated && user.userData.roles.find((element) => element.role == 'ADMINISTRADOR') != undefined) ?
+                            <ul class="navbar-nav">
+                                <li className="nav-item"><Link className="nav-link" to="/users">Users</Link></li>
+                            </ul> 
+                        : null}
+                        {(  user.authenticated ) ?
+                            <ul class="navbar-nav">
+                                <li className="nav-item"><Link className="nav-link" to="/users">Portfolio</Link></li> 
+                            </ul>
+                        : null}
+                    </div>
+                    <div className="nav-item dropdown user-login">
+                        <img class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" src="static/images/profile.png" />
+                        <div class="dropdown-menu">
+                            {(!user.authenticated ) ? <UserLoginCard /> : null }
+                            {(user.authenticated ) ? <UserProfileCard /> : null }
+                        </div>
+                    </div>
+                </nav>);
 }
-
-export default Header

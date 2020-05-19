@@ -17,15 +17,22 @@ public class CustomErrorController implements ErrorController {
  
 	private static final Logger logger = LogManager.getLogger(CustomErrorController.class);
  
-    @RequestMapping("/error")
+	/* @RequestMapping("/error")
     public String handleError(HttpServletRequest request) {
-    	logger.log(Level.ERROR, "GET " + request.getRequestURI());
+    	logger.log(Level.ERROR, request.getMethod() + " " + request.getRequestURI() + " - " + request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE));
+    	
+    	if (HttpStatus.NOT_FOUND
+                .value() == (int) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE)) {
+            return "redirect:/";
+        }
+        
         if (HttpStatus.NOT_FOUND
                 .value() == (int) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE)) {
             return "redirect:/";
         }
-        return "error";
-    }
+          
+        return "redirect:/";
+    }*/
  
     @Override
     public String getErrorPath() {

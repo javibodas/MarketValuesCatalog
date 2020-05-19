@@ -10,7 +10,11 @@ module.exports = {
   })],
   module: {
     rules: [
-        {
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [{ loader: 'file-loader' }]
+      },
+      {
         test: /\.css$/i,
         exclude: /node_modules/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],

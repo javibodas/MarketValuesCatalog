@@ -1,4 +1,4 @@
-const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://marketvaluescatalog.herokuapp.com';
+import { API_URL } from '../settings';
 
 export default function getSearchValues(value, country, index){
 

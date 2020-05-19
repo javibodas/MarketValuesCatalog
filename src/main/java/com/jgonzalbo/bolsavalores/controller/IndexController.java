@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,6 +35,14 @@ public class IndexController {
 		logger.log(Level.INFO, "GET /index");
 		
 		return new ResponseEntity<List<Index>>(indexService.getAllStocks(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/{country}")
+	@ResponseBody
+	public  List<Index> getIndexByCountry(@PathVariable("country") String country){
+		logger.log(Level.INFO, "GET /index/{ " + country + " }");
+		
+		return indexService.getStockByCountries(new String[] {country});
 	}
 	
 	@ModelAttribute

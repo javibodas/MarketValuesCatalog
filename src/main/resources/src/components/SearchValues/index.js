@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import getSearchValues from '../../services/getSearchValues';
-import getIndexStocks from '../../services/getIndexStocks.js';
+import getSearchValues from '../../services/values/getSearchValues';
+import getIndexStocks from '../../services/index/getIndexStocks';
+import getIndexByCountry from '../../services/index/getIndexByCountry';
+import getCountries from '../../services/countries/getCountries';
 
-function Search(props){
+import './index.css';
+
+export default function Search(props){
 
 	const [ values, setValues ] = useState([]);
 	const [ index, setIndex ] = useState([]);
+	const [ countries, setCountries ] = useState([]);
 	const [ formFilter, setFormFilters ] = useState({
 													value: '',
 													index: '',
@@ -13,22 +18,35 @@ function Search(props){
 													});
 
 	useEffect(function(){
-		getIndexStocks()
+		/*getIndexStocks()
 		.then((result) => { setIndex(result); })
+		.catch((error) => { console.log('ERROR:' + error)})*/
+
+
+		getCountries()
+		.then((result) => { setCountries(result); })
 		.catch((error) => { console.log('ERROR:' + error)})
 
 	},[]);
 
-	useEffect(function(){
-
-
-	},[values]);
-
 	function getValues(e){
 		e.preventDefault();
-		console.log(formFilter.value + formFilter.contry + formFilter.index)
+		
 		getSearchValues((formFilter.value ? formFilter.value : ''), (formFilter.contry ? formFilter.contry : ''), (formFilter.index ? formFilter.index : ''))
 		  .then((result) => { setValues(result) })
+		  .catch((error) => { console.log('ERROR:' + error)})
+	}
+
+	function getIndex(country){
+		const el = document.querySelector('.index-selector');
+		if(country == 'Choose your country'){
+			el.setAttribute("disabled","")
+			el.setAttribute("id","disabledSelect")
+			return;
+		}
+
+		getIndexByCountry(country.toLowerCase())
+		  .then((result) => { setIndex(result); el.removeAttribute("disabled"); el.removeAttribute("id")})
 		  .catch((error) => { console.log('ERROR:' + error)})
 	}
 
@@ -39,46 +57,19 @@ function Search(props){
 					<div className="form-row">
 						<div className="form-group col-md">
 							<label>Country</label>
-		  					<select className="mdb-select md-form" multiple>
+		  					<select className="form-control form-control-md country-selector" onChange={e => getIndex(e.target.options[e.target.selectedIndex].text) }>
 			  					<option selected>Choose your country</option>
-			  					<option>Brazil</option>
-			  					<option>Canada</option>
-			  					<option>China</option>
-			  					<option>Denmark</option>
-			  					<option>Dubai</option>
-			  					<option>Finland</option>
-			  					<option>France</option>
-			  					<option>Germany</option>
-			  					<option>Hong-Kong</option>
-			  					<option>India</option>
-			  					<option>Indonesia</option>
-			  					<option>Ireland</option>
-			  					<option>Malaysia</option>
-			  					<option>Mexico</option>
-			  					<option>Netherlands</option>
-			  					<option>Pakistan</option>
-			  					<option>Philippines</option>
-			  					<option>Russia</option>
-			  					<option>Saudi-Arabia</option>
-			  					<option>Singapore</option>
-			  					<option>South-Africa</option>
-			  					<option>South-Korea</option>
-			  					<option>Spain</option>
-			  					<option>Sweden</option>
-			  					<option>Switzerland</option>
-			  					<option>Thailand</option>
-			  					<option>Turkey</option>
-			  					<option>United-Kingdom</option>
-			  					<option>United-States</option>
-			  					<option>Netherlands</option>
+			  					{countries.map((country) => 
+									<option id={country.id}>{country.country.toUpperCase()}</option>
+								)}
 							</select>
 						</div>
 						<div className="form-group col-md">
 							<label>Index</label>
-							<select className="mdb-select md-form" searchable="Search here.." onChange={e => setFormFilters({index : e.target.options[e.target.selectedIndex].attributes[0].value})}>
-								<option>Choose an Index</option>
+							<select id="disabledSelect" className="form-control form-control-md index-selector" searchable="Search here.." onChange={e => setFormFilters({index : e.target.options[e.target.selectedIndex].attributes[0].value})} disabled>
+								<option selected>Choose an Index</option>
 								{index.map((ind) => 
-									<option id={ind.id}>{ind.name}</option>
+									<option id={ind.id}>{ind.name.toUpperCase()}</option>
 								)}
 							</select>
 						</div>
@@ -89,8 +80,8 @@ function Search(props){
 		  				</div>
 					</div>
 					<div className="form-row search-button">
-		  				<div className="form-group float-right">
-	  						<button className="btn btn-outline-dark">Search</button>
+		  				<div className="form-group">
+	  						<button className="btn btn-outline-dark float-right">Search</button>
 	  					</div>
 	  				</div>
 				</form>
@@ -122,5 +113,3 @@ function Search(props){
 		</div>
     )
 }
-
-export default Search;

@@ -1,4 +1,5 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState , useEffect, useContext } from 'react';
+import './index.css';
 
 export default function CreateUser(props){
 
@@ -8,10 +9,14 @@ export default function CreateUser(props){
                                                         username: '',
                                                         password: '' });
     
-    useEffect(function(){ console.log('email modificado')},[formValues.email]);
+    useEffect(function(){ });
+
+    const handleCreateUser = function(event){
+        event.preventDefault();
+    }
 
     return (<div className="container">
-                <form>
+                <form onSubmit={handleCreateUser}>
                     <div className="row">
                         <div className="col">
                             <input type="text" className="form-control" placeholder="First name" />
@@ -22,7 +27,7 @@ export default function CreateUser(props){
                     </div>
                     <div className="row">
                         <div className="col">
-                            <input type="text" className="form-control" placeholder="Email" value={formValues.email}/>
+                            <input type="text" className="form-control" placeholder="Email" />
                         </div>
                         <div className="col">
                             <input type="text" className="form-control" placeholder="Username" />

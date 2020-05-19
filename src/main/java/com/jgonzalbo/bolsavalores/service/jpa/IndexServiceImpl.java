@@ -1,4 +1,4 @@
-package com.jgonzalbo.bolsavalores.service;
+package com.jgonzalbo.bolsavalores.service.jpa;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.jgonzalbo.bolsavalores.externalapi.IFCSService;
 import com.jgonzalbo.bolsavalores.models.Index;
 import com.jgonzalbo.bolsavalores.models.Value;
+import com.jgonzalbo.bolsavalores.service.IIndexService;
 
 @Service
 public class IndexServiceImpl implements IIndexService {
