@@ -1,5 +1,6 @@
 package com.jgonzalbo.bolsavalores.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -46,20 +47,18 @@ public class UserController {
 	
 	@RequestMapping(value = "", method = RequestMethod.POST, consumes="application/json", produces="application/json")
 	@ResponseBody
-	public ApplicationUser createUser(@RequestBody ApplicationUser user) {
+	public HashMap<String,Object> createUser(@RequestBody ApplicationUser user) {
 		logger.log(Level.INFO, "POST /user");
 		
-		userService.savesOrUpdateUser(user);
-		return user;
+		return userService.createUser(user);
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.PUT, consumes="application/json", produces="application/json")
 	@ResponseBody
-	public ApplicationUser updateUser(@RequestBody ApplicationUser user) {
+	public HashMap<String,Object> updateUser(@RequestBody ApplicationUser user) {
 		logger.log(Level.INFO, "PUT /user");
 		
-		userService.savesOrUpdateUser(user);
-		return user;
+		return userService.updateUser(user);
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET, produces="application/json")

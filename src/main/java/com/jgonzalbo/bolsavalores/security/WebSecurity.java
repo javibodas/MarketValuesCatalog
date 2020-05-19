@@ -56,6 +56,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 			.antMatchers("/dist/**").permitAll()
 			// API ACCESS POINT DOESNT REQUIRE AUTHENTICATION
 			.antMatchers("/", "/index","/index/**","/values/**", "/country", "/login").permitAll()
+			.antMatchers(HttpMethod.POST, "/user").permitAll()
+			.antMatchers(HttpMethod.GET, "/user/encrypted/**").permitAll()
 			// ANY OTHER ACCESS POINTS REQUIRES AUTHENTICATION
 			.anyRequest().authenticated()
 			//.anyRequest().permitAll()
