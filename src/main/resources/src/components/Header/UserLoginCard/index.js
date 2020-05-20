@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'wouter'
 import UserContext from '../../../context/userContext';
 import loginUser from '../../../services/users/loginUser';
@@ -8,6 +8,7 @@ import './index.css';
 export default function UserLoginCard(props){
 
     const { user, setUser } = useContext(UserContext);
+    const [errLogin , setErrLogin ] = useState(false)
 
     function handleLoginUser(event){
       event.preventDefault();
@@ -17,20 +18,31 @@ export default function UserLoginCard(props){
       loginUser({'username': user, 'password' : pass})
       .then((response) => {
         if(response.ok){
+  
+          // Obtain user authenticated
             getAuthenticatedUser(response.headers.get('Authorization'))
-            .then((result) => {setUser({ 'authenticated' : true, 'userData': result, 'token' : response.headers.get('Authorization') }); console.log(result); })
+            .then((result) => {
+                setUser({ 'authenticated' : true, 'userData': result, 'token' : response.headers.get('Authorization') });
+                document.getElementsByClassName('dropdown-menu')[0].classList.toggle('show');
+            })
             .catch((error) => console.log(error));
+
         }else{
-            setUser({'authenticated' : false});
+            setErrLogin(true);
         }
       })
-      .catch((error) => { console.log(error) });
-
-      document.getElementsByClassName('dropdown-menu')[0].classList.toggle('show');
+      .catch((error) => { setErrLogin(true); console.log(error) });
     }
 
     return (
         <form onSubmit={handleLoginUser} id='login-form'>
+          {errLogin ?
+            <div className="form-group row">
+              <div class="alert alert-danger" role="alert">
+                Incorrect credentials
+              </div>
+            </div> : null
+          }
           <div className="form-group row">
             <label for="inputEmail3" className="col-sm-2 col-form-label">Username</label>
             <div className="col-sm-10">

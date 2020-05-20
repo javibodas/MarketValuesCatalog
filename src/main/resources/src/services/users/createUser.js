@@ -1,12 +1,11 @@
 import { API_URL } from '../settings';
 
-export default function createUser(){
+export default function createUser(user){
 	
 	const URI = API_URL + '/user';
-	var data = {username: 'example'};
-
 	return fetch(URI,{
 			method: 'POST',
-			body: JSON.stringify(data)})
+			headers: {'Content-Type':'application/json'},
+			body: JSON.stringify(user)})
       	.then(res => res.json())
 }

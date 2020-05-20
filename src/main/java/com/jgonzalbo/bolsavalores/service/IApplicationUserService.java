@@ -12,5 +12,6 @@ public interface IApplicationUserService {
 	public HashMap<String,Object> createUser(ApplicationUser u);
 	public HashMap<String,Object> updateUser(ApplicationUser u);
 	public ApplicationUser getUserByUsername(String username);
+	public HashMap<String,Object> deleteUser(int id);
 
 }

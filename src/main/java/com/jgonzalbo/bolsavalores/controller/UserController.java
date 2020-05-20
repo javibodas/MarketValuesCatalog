@@ -63,10 +63,18 @@ public class UserController {
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public ResponseEntity<List<ApplicationUser>> getUser(@PathVariable int id) {
+	public ApplicationUser getUser(@PathVariable int id) {
 		logger.log(Level.INFO, "GET /user/{" + id + "}");
 		
-		return new ResponseEntity<>(userService.getAllUsers(),  HttpStatus.OK);
+		return userService.getUserById(id);
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE, produces="application/json")
+	@ResponseBody
+	public HashMap<String,Object> deleteUser(@PathVariable int id) {
+		logger.log(Level.INFO, "DELETE /user/{" + id + "}");
+		
+		return userService.deleteUser(id);
 	}
 	
 	@RequestMapping(value="/encrypted/{password}", method = RequestMethod.GET, produces="application/json")

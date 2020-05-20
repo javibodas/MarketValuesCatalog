@@ -106,6 +106,21 @@ public class ApplicationUserServiceImpl implements IApplicationUserService{
 	}
 	
 	@Override
+	public HashMap<String,Object> deleteUser(int id){
+		HashMap<String,Object> result = new HashMap<>();
+		ApplicationUser u = getUserById(id);
+		
+		if(u == null) {
+			result.put("result", false);
+			result.put("message", "User does not exist");
+		}
+		
+		usersRepository.delete(u);
+		result.put("result", true);
+		return result;
+	}
+	
+	@Override
 	public ApplicationUser getUserById(int id) {
 		return usersRepository.findById(id).isPresent() ? usersRepository.findById(id).get() : null;
 	}

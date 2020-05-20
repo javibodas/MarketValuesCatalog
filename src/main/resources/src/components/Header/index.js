@@ -16,19 +16,20 @@ export default function Header(props){
                     </button>
                     <div className="collapse navbar-collapse">
                         {(  user.authenticated && user.userData.roles.find((element) => element.role == 'ADMINISTRADOR') != undefined) ?
-                            <ul class="navbar-nav">
+                            <ul className="navbar-nav">
                                 <li className="nav-item"><Link className="nav-link" to="/users">Users</Link></li>
                             </ul> 
                         : null}
                         {(  user.authenticated ) ?
-                            <ul class="navbar-nav">
+                            <ul className="navbar-nav">
                                 <li className="nav-item"><Link className="nav-link" to="/users">Portfolio</Link></li> 
                             </ul>
                         : null}
                     </div>
                     <div className="nav-item dropdown user-login">
-                        <img class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" src="static/images/profile.png" />
-                        <div class="dropdown-menu">
+                        {(!user.authenticated ) ? <img className="nav-link dropdown-toggle profile-img" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" src="images/profile.png" /> :
+                                                  <img className="nav-link dropdown-toggle profile-img active-img-profile" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" src="images/profile.png" /> }
+                        <div className="dropdown-menu">
                             {(!user.authenticated ) ? <UserLoginCard /> : null }
                             {(user.authenticated ) ? <UserProfileCard /> : null }
                         </div>

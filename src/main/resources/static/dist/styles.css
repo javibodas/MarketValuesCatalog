@@ -30,14 +30,22 @@ body{
 	.user-login > .btn{
 		margin: 0 1rem 0 0;
 	}
+	.user-login > img{
+		max-width: 65px;
+		max-height: 65px;
+		border-radius: 100%;
+	}
 	.user-login > img:hover{
 		cursor: pointer;
 	}
-
-	.dropdown-menu{
-		left: -9rem;
-		padding-left: 1rem; 
+	.user-login .active-img-profile{
+		border: 2px solid #4ef542;
 	}
+
+.dropdown-menu{
+	left: -9rem;
+	padding-left: 1rem; 
+}
 .jumbotron{
 	padding: 1rem;
 }
@@ -56,7 +64,9 @@ body{
     position: relative!important;
     float: right!important;
 }
-
+.create-user-form > .row{
+    margin-top: 1rem;
+}
 .footer{
 	position: fixed; bottom: 0; width: 100%;
     text-align: center;

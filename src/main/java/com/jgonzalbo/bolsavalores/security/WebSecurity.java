@@ -54,6 +54,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			// CLIENT SOURCES WITHOUT AUTHENTICATION
 			.antMatchers("/dist/**").permitAll()
+			.antMatchers("/images/**").permitAll()
 			// API ACCESS POINT DOESNT REQUIRE AUTHENTICATION
 			.antMatchers("/", "/index","/index/**","/values/**", "/country", "/login").permitAll()
 			.antMatchers(HttpMethod.POST, "/user").permitAll()
